@@ -1,11 +1,9 @@
 import React from 'react'
 
-const onClick= (ev,id) =>
-{
-    alert('on click '+id);
-}
-const GameCircle = ({id,color,children}) => {
-  console.log(id);
+
+const GameCircle = ({id,color,children,onCircleClicked}) => {
+
+ 
   const style={
     backgroundColor: color,
     borderRadius: '50%',
@@ -14,7 +12,7 @@ const GameCircle = ({id,color,children}) => {
     margin:10
   }
   return (
-    <div style={style} onClick={(ev) =>onClick(ev,id)}>
+    <div style={style} onClick={() =>onCircleClicked(id)}>
         {children} 
     </div>
   )
