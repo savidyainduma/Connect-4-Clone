@@ -1,18 +1,11 @@
 import React from 'react'
+import '../Game.css';
 
-
-const GameCircle = ({id,color,children,onCircleClicked}) => {
+const GameCircle = ({id,children,onCircleClicked}) => {
 
  
-  const style={
-    backgroundColor: color,
-    borderRadius: '50%',
-    width: 100,
-    height: 100,
-    margin:10
-  }
   return (
-    <div style={style} onClick={() =>onCircleClicked(id)}>
+    <div className='gameCircle' style={id % 2 === 0 ? {backgroundColor: 'red'} : {backgroundColor: 'blue'} } onClick={() =>onCircleClicked(id)}>
         {children} 
     </div>
   )
