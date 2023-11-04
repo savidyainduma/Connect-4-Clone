@@ -1,9 +1,18 @@
 import React from 'react'
+const GAME_STATE_PLAYING = 1;
+const Footer = ({onNewgameClick, onSuggestClick, gameState}) => {
 
-const Footer = () => {
+  const renderButtons = () => {
+    if(gameState === GAME_STATE_PLAYING){
+      return  <button onClick={onSuggestClick}>Suggest</button>
+    }
+    return <button  onClick={onNewgameClick}>New Game</button>
+  }
   return (
     <div className='panel footer'>
-        <button className='footer button'>New Game</button>
+      
+        {renderButtons() }
+      
     </div>
   )
 }

@@ -1,9 +1,9 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import GameCircle from "./GameCircle";
 import '../Game.css';
 import Header from "./Header";
 import Footer from "./Footer";
-import { isWinner, isDraw } from "../Helper"; 
+import { isWinner, isDraw, getRandomComputerMove } from "../Helper"; 
 const GAME_STATE_PLAYING = 1;
 const GAME_STATE_WIN = 2;
 const GAME_STATE_DRAW = 3;
@@ -21,6 +21,17 @@ const GameBoard= (props) =>
     const [winPlayer, setWinPlayer] = useState(NO_PLAYER);
     console.log(gameBoard);
 
+    useEffect(() => {
+        initGame();
+    }, []);
+
+    const initGame =() => {
+        console.log('initGame');
+        setGameBoard(Array(16).fill(NO_PLAYER));
+        setCurrentPlayer(PLAYER_1);
+        setGameState(GAME_STATE_PLAYING);
+    }
+
     const initBoard = () => {
         const circles =[];
         for(let i=0; i<NO_CIRCLES; i++)
@@ -28,6 +39,11 @@ const GameBoard= (props) =>
             circles.push(renderCircle(i));
         }
         return circles;
+    }
+
+    const suggestMove = () => {
+        circleClicked(getRandomComputerMove(gameBoard));
+        console.log("randome move");
     }
 
     const circleClicked = (id)=>{
@@ -67,7 +83,7 @@ const GameBoard= (props) =>
             <div className="gameBoard" >
                 {initBoard()}
             </div>
-            <Footer />
+            <Footer onNewgameClick={initGame} onSuggestClick={suggestMove} gameState={gameState}/>
         </>
     )
     
